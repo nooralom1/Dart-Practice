@@ -34,75 +34,79 @@ class _CalculationState extends State<Calculation> {
       appBar: AppBar(title: Text("Mutiplication Show"),
       centerTitle: true,
       ),
-      body: Center(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
-          child: Column(
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  SizedBox(
-                    height: 50,
-                    width: 150,
-                    child: TextField(
-                      controller: firstController,
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(20)
-                        )
+      body: SingleChildScrollView(
+        child: Center(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    SizedBox(
+                      height: 50,
+                      width: 150,
+                      child: TextField(
+                        controller: firstController,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(20)
+                          )
+                        ),
                       ),
                     ),
-                  ),
-                  SizedBox(width: 20,),
-                  SizedBox(
-                    height: 50,
-                    width: 150,
-                    child: TextField(
-                      controller: secondController,
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(20)
-                        )
+                    SizedBox(width: 20,),
+                    SizedBox(
+                      height: 50,
+                      width: 150,
+                      child: TextField(
+                        controller: secondController,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(20)
+                          )
+                        ),
                       ),
                     ),
-                  ),
-                ],
-              ),
-              SizedBox(height: 20,),
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.red,
-                  foregroundColor: Colors.white,
-                  fixedSize: Size(250, 40)
+                  ],
                 ),
-                  onPressed: (){
-                function();
-                log(resultList.length.toString());
-              }, child: Text("Mutiplication Show")),
-              SizedBox(height: 30,),
-              Row(
-                children: [
-                  Expanded(
-                    child: ListView.builder(
-                      shrinkWrap: true,
-                      itemCount: resultList.length,
-                        itemBuilder: (context,index){
-                        return Text("${resultList[index]}");
-                        }),
+                SizedBox(height: 20,),
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.red,
+                    foregroundColor: Colors.white,
+                    fixedSize: Size(250, 40)
                   ),
-                  SizedBox(width: 20,),
-                  Expanded(
-                    child: ListView.builder(
-                      shrinkWrap: true,
-                      itemCount: resultList.length,
-                        itemBuilder: (context,index){
-                        return Text("${resultList[index]}");
-                        }),
-                  ),
-                ],
-              ),
-            ],
+                    onPressed: (){
+                  function();
+                  log(resultList.length.toString());
+                }, child: Text("Mutiplication Show")),
+                SizedBox(height: 30,),
+                Row(
+                  children: [
+                    Expanded(
+                      child: ListView.builder(
+                        physics: ScrollPhysics(),
+                        shrinkWrap: true,
+                        itemCount: resultList.length,
+                          itemBuilder: (context,index){
+                          return Text("${resultList[index]}");
+                          }),
+                    ),
+                    SizedBox(width: 20,),
+                    Expanded(
+                      child: ListView.builder(
+                        physics: ScrollPhysics(),
+                        shrinkWrap: true,
+                        itemCount: resultList.length,
+                          itemBuilder: (context,index){
+                          return Text("${resultList[index]}");
+                          }),
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       ),
