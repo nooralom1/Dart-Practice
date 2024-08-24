@@ -10,7 +10,8 @@ class Calculation extends StatefulWidget {
 }
 
 class _CalculationState extends State<Calculation> {
-  TextEditingController controller = TextEditingController();
+  TextEditingController firstController = TextEditingController();
+  TextEditingController secondController = TextEditingController();
 
   List<String> resultList = [];
   int num = 0;
@@ -18,7 +19,7 @@ class _CalculationState extends State<Calculation> {
   function(){
     setState(() {});
     try{
-      num = int.parse(controller.text);
+      num = int.parse(firstController.text);
       for(int i=1; i<=10; i++){
         resultList.add("($num x $i) = ${num*i}");
       }
@@ -30,35 +31,79 @@ class _CalculationState extends State<Calculation> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Calculation"),
+      appBar: AppBar(title: Text("Mutiplication Show"),
       centerTitle: true,
       ),
       body: Center(
-        child: Column(
-          children: [
-            TextField(
-              controller: controller,
-              decoration: InputDecoration(
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(20)
-                )
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          child: Column(
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  SizedBox(
+                    height: 50,
+                    width: 150,
+                    child: TextField(
+                      controller: firstController,
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(20)
+                        )
+                      ),
+                    ),
+                  ),
+                  SizedBox(width: 20,),
+                  SizedBox(
+                    height: 50,
+                    width: 150,
+                    child: TextField(
+                      controller: secondController,
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(20)
+                        )
+                      ),
+                    ),
+                  ),
+                ],
               ),
-            ),
-            SizedBox(height: 20,),
-            ElevatedButton(onPressed: (){
-              function();
-              log(resultList.length.toString());
-            }, child: Text("Calculate")),
-            Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: ListView.builder(
-                    itemCount: resultList.length,
-                      itemBuilder: (context,index){
-                      return Text("${resultList[index]}");
-                      }),
-                ))
-          ],
+              SizedBox(height: 20,),
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.red,
+                  foregroundColor: Colors.white,
+                  fixedSize: Size(250, 40)
+                ),
+                  onPressed: (){
+                function();
+                log(resultList.length.toString());
+              }, child: Text("Mutiplication Show")),
+              SizedBox(height: 30,),
+              Row(
+                children: [
+                  Expanded(
+                    child: ListView.builder(
+                      shrinkWrap: true,
+                      itemCount: resultList.length,
+                        itemBuilder: (context,index){
+                        return Text("${resultList[index]}");
+                        }),
+                  ),
+                  SizedBox(width: 20,),
+                  Expanded(
+                    child: ListView.builder(
+                      shrinkWrap: true,
+                      itemCount: resultList.length,
+                        itemBuilder: (context,index){
+                        return Text("${resultList[index]}");
+                        }),
+                  ),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );
